@@ -31,25 +31,27 @@ namespace AwsDev
                     {
                         Name = "AWS-AWSManagedRulesCommonRuleSet",
                         Priority = 0,
-                        Statement = {},
-                        // Statement = new CfnWebACL.ManagedRuleGroupStatementProperty
-                        // {
-                        //     VendorName = "AWS",
-                        //     Name = "AWSManagedRulesCommonRuleSet",
-                        //     },
+                        Statement = new CfnWebACL.StatementOneProperty
+                        {
+                            ManagedRuleGroupStatement = new CfnWebACL.ManagedRuleGroupStatementProperty
+                            {
+                                VendorName = "AWS",
+                                Name = "AWSManagedRulesCommonRuleSet",
+                            },
+                        },
                         VisibilityConfig = new CfnWebACL.VisibilityConfigProperty
                         {
                                 CloudWatchMetricsEnabled = true,
                                 SampledRequestsEnabled = true,
-                                MetricName = "AWS AWSManagedRulesCommonRuleSet",
+                                MetricName = "AWS-AWSManagedRulesCommonRuleSet",
                         },
-                        OverrideAction = new CfnWebACL.OverrideActionProperty { None = {}},
+                        OverrideAction = new CfnWebACL.OverrideActionProperty
+                        {
+                            None = new CfnWebACL.RuleActionProperty{Count=false},
+                        }, 
                     },
-                      
                 }
-            
             });
         }
     }
 }
-
