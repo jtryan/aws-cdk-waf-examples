@@ -25,26 +25,29 @@ namespace AwsDev
                 },
                 Scope = "REGIONAL",
                 Name ="csharp-webAcl",
-                Rules = new List<CfnWebACL.RuleProperty>()
+                Rules = new object[]
                 {
-                    new CfnWebACL.RuleProperty()
+                    new CfnWebACL.RuleProperty
                     {
-                       Name = "AWS-AWSManagedRulesCommonRuleSet",
-                       Priority = 0,
-                       Statement = new CfnWebACL.ManagedRuleGroupStatementProperty
-                       {
-                           VendorName = "AWS",
-                           Name = "AWSManagedRulesCommonRuleSet",
+                        Name = "AWS-AWSManagedRulesCommonRuleSet",
+                        Priority = 0,
+                        Statement = {},
+                        // Statement = new CfnWebACL.ManagedRuleGroupStatementProperty
+                        // {
+                        //     VendorName = "AWS",
+                        //     Name = "AWSManagedRulesCommonRuleSet",
+                        //     },
+                        VisibilityConfig = new CfnWebACL.VisibilityConfigProperty
+                        {
+                                CloudWatchMetricsEnabled = true,
+                                SampledRequestsEnabled = true,
+                                MetricName = "AWS AWSManagedRulesCommonRuleSet",
                         },
-                       VisibilityConfig = new CfnWebACL.VisibilityConfigProperty
-                       {
-                            CloudWatchMetricsEnabled = true,
-                            SampledRequestsEnabled = true,
-                            MetricName = "AWS AWSManagedRulesCommonRuleSet",
-                       },
-                       OverrideAction = new CfnWebACL.OverrideActionProperty { None = {}},
+                        OverrideAction = new CfnWebACL.OverrideActionProperty { None = {}},
                     },
+                      
                 }
+            
             });
         }
     }
