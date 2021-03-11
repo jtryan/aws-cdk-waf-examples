@@ -1,30 +1,27 @@
 using Amazon.CDK;
 using Amazon.CDK.AWS.WAFv2;
 
-using System.Collections.Generic;
-
-
-namespace AwsDev
+namespace WafDemoCs
 {
-    public class AwsDevStack : Stack
+    public class WafDemoCsStack : Stack
     {
-        internal AwsDevStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
+        internal WafDemoCsStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
         {
-
-            var _ = new CfnWebACL(this, "WebAcl", new CfnWebACLProps
+            var webAcl = new CfnWebACL(this, "WebAcl", new CfnWebACLProps
             {
+  
                 DefaultAction = new CfnWebACL.DefaultActionProperty
                 {
-                    Allow = new CfnWebACL.RuleActionProperty { Allow = true }
+                    Allow = {}
                 },
                 VisibilityConfig = new CfnWebACL.VisibilityConfigProperty
                 {
                     CloudWatchMetricsEnabled = true,
                     SampledRequestsEnabled = true,
-                    MetricName = "test-waf-metric",
+                    MetricName = "cs-waf-metric",
                 },
                 Scope = "REGIONAL",
-                Name ="csharp-webAcl",
+                Name = "csharp-webAcl",
                 Rules = new object[]
                 {
                     new CfnWebACL.RuleProperty
@@ -43,12 +40,12 @@ namespace AwsDev
                         {
                                 CloudWatchMetricsEnabled = true,
                                 SampledRequestsEnabled = true,
-                                MetricName = "AWS-AWSManagedRulesCommonRuleSet",
+                                MetricName = "AWS--CS-AWSManagedRulesCommonRuleSet",
                         },
                         OverrideAction = new CfnWebACL.OverrideActionProperty
                         {
-                            None = new CfnWebACL.RuleActionProperty{Count=false},
-                        }, 
+                            Count = {}
+                        },
                     },
                 }
             });

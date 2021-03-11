@@ -4,8 +4,6 @@ from aws_cdk import (
 
 )
 
-
-
 class AwsDevPyStack(core.Stack):
 
     def __init__(self, scope: core.Construct, construct_id: str, **kwargs) -> None:
@@ -14,7 +12,7 @@ class AwsDevPyStack(core.Stack):
         web_acl = wafv2.CfnWebACL(
             scope_=self, id='WebAcl',
             default_action=wafv2.CfnWebACL.DefaultActionProperty(allow={}),
-            scope='CLOUDFRONT',
+            scope='REGIONAL',
             visibility_config=wafv2.CfnWebACL.VisibilityConfigProperty(
                 cloud_watch_metrics_enabled=True,
                 sampled_requests_enabled=True,
@@ -39,6 +37,25 @@ class AwsDevPyStack(core.Stack):
                         'cloudWatchMetricsEnabled': True,
                         'metricName': "AWS-AWSManagedRulesCommonRuleSet"
                     }
+                },
+                {
+                    'name': 'AWS-AWSManagedRulesAmazonIpReputationList',
+                    'priority': 1,
+                    'statement': {
+                        'managedRuleGroupStatement': {
+                            'vendorName': 'AWS',
+                            'name': 'AWSManagedRulesAmazonIpReputationList'
+                        }
+                    },
+                    'overrideAction': {
+                        'count': {}
+                    },
+                    'visibilityConfig': {
+                        'sampledRequestsEnabled': True,
+                        'cloudWatchMetricsEnabled': True,
+                        'metricName': "AWS-AWSManagedRulesAmazonIpReputationList"
+                    }
                 }
+
             ]
         )

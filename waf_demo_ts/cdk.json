@@ -1,5 +1,5 @@
 {
-  "app": "dotnet run -p src/AwsDev/AwsDev.csproj",
+  "app": "npx ts-node --prefer-ts-exts bin/waf_demo_ts.ts",
   "context": {
     "@aws-cdk/core:enableStackNameDuplicates": "true",
     "aws-cdk:enableDiffNoFail": "true",
