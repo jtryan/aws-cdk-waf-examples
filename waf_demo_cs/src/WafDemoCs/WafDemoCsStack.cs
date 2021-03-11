@@ -10,9 +10,14 @@ namespace WafDemoCs
             var webAcl = new CfnWebACL(this, "WebAcl", new CfnWebACLProps
             {
   
+                // Recommded by awscdl tem - it fails
+                // DefaultAction = new CfnWebACL.DefaultActionProperty
+                // {
+                //     Block = {}
+                // },
                 DefaultAction = new CfnWebACL.DefaultActionProperty
                 {
-                    Allow = {}
+                    Allow = new CfnWebACL.RuleActionProperty { Allow = true }
                 },
                 VisibilityConfig = new CfnWebACL.VisibilityConfigProperty
                 {
@@ -44,8 +49,14 @@ namespace WafDemoCs
                         },
                         OverrideAction = new CfnWebACL.OverrideActionProperty
                         {
-                            Count = {}
-                        },
+                            None = new CfnWebACL.RuleActionProperty{Count=false},
+                        }, 
+
+                        // Recommded by awscdl tem - it fails
+                        // OverrideAction = new CfnWebACL.OverrideActionProperty
+                        // {
+                        //     Count = {}
+                        // },
                     },
                 }
             });

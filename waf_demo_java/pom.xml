@@ -48,6 +48,11 @@
             <artifactId>wafv2</artifactId>
             <version>${cdk.version}</version>
         </dependency>
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>s3</artifactId>
+            <version>${cdk.version}</version>
+        </dependency>
 
         <dependency>
           <groupId>org.junit.jupiter</groupId>

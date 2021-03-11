@@ -1,10 +1,13 @@
 package com.myorg;
 
+
+import org.jetbrains.annotations.NotNull;
 import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;
 import software.amazon.awscdk.services.wafv2.CfnWebACL;
-import software.amazon.awscdk.services.wafv2.CfnWebACLProps;
+
+import java.util.ArrayList;
 
 public class WafDemoJavaStack extends Stack {
     public WafDemoJavaStack(final Construct scope, final String id) {
@@ -14,18 +17,38 @@ public class WafDemoJavaStack extends Stack {
     public WafDemoJavaStack(final Construct scope, final String id, final StackProps props) {
         super(scope, id, props);
 
-        CfnWebACL.Builder.create(this, "webAcl")
-                .name("java-WebAcl")
-                .scope("REGIONAL")
-                .defaultAction(CfnWebACL.DefaultActionProperty.builder()
-                        .allow(CfnWebACL.RuleActionProperty.builder().allow(true).build())
-                        .build())
-                .visibilityConfig(CfnWebACL.VisibilityConfigProperty.builder()
-                        .cloudWatchMetricsEnabled(true)
-                        .sampledRequestsEnabled(true)
-                        .metricName("java-waf-metric")
-                        .build())
-                .build();
+        CfnWebACL.VisibilityConfigProperty visibilityConfigProperty = new CfnWebACL.VisibilityConfigProperty() {
+            @Override
+            public @NotNull Object getCloudWatchMetricsEnabled() {
+                return true;
+            }
+
+            @Override
+            public @NotNull String getMetricName() {
+                return "java-waf-metric";
+            }
+
+            @Override
+            public @NotNull Object getSampledRequestsEnabled() {
+                return true;
+            }
+        };
+
+//        CfnWebACL.DefaultActionProperty defaultActionProperty = CfnWebACL.DefaultActionProperty.builder()
+//                .allow(CfnWebACL.RuleActionProperty.builder().allow(true).build())
+//                .build();
+//        };
+
+        final CfnWebACL cfnWebACL =
+            CfnWebACL.Builder.create(this, "webAcl")
+                    .name("java-WebAcl")
+                    .scope("REGIONAL")
+                    .defaultAction(CfnWebACL.DefaultActionProperty.builder()
+                            .allow(CfnWebACL.RuleActionProperty.builder().allow(true).build())
+                            .build())
+                    .visibilityConfig(visibilityConfigProperty)
+                    .rules(new ArrayList<>())
+                    .build();
 
     }
             
