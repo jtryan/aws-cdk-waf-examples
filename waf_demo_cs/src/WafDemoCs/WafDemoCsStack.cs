@@ -10,9 +10,14 @@ namespace WafDemoCs
             var webAcl = new CfnWebACL(this, "WebAcl", new CfnWebACLProps
             {
   
+                // Recommded by awscdl tem - it fails
+                // DefaultAction = new CfnWebACL.DefaultActionProperty
+                // {
+                //     Block = {}
+                // },
                 DefaultAction = new CfnWebACL.DefaultActionProperty
                 {
-                    Allow = {}
+                    Allow = new CfnWebACL.RuleActionProperty { Allow = true }
                 },
                 VisibilityConfig = new CfnWebACL.VisibilityConfigProperty
                 {
@@ -40,12 +45,41 @@ namespace WafDemoCs
                         {
                                 CloudWatchMetricsEnabled = true,
                                 SampledRequestsEnabled = true,
-                                MetricName = "AWS--CS-AWSManagedRulesCommonRuleSet",
+                                MetricName = "AWS-CS-AWSManagedRulesCommonRuleSet",
                         },
                         OverrideAction = new CfnWebACL.OverrideActionProperty
                         {
-                            Count = {}
+                            Count = new CfnWebACL.RuleActionProperty{ Count = true },
+                        }, 
+
+                        // Recommded by awscdl tem - it fails
+                        // OverrideAction = new CfnWebACL.OverrideActionProperty
+                        // {
+                        //     Count = {}
+                        // },
+                    },
+                    new CfnWebACL.RuleProperty
+                    {
+                        Name = "AWSManagedRulesAnonymousIpList",
+                        Priority = 1,
+                        Statement = new CfnWebACL.StatementOneProperty
+                        {
+                            ManagedRuleGroupStatement = new CfnWebACL.ManagedRuleGroupStatementProperty
+                            {
+                                VendorName = "AWS",
+                                Name = "AWSManagedRulesAnonymousIpList",
+                            },
                         },
+                        VisibilityConfig = new CfnWebACL.VisibilityConfigProperty
+                        {
+                                CloudWatchMetricsEnabled = true,
+                                SampledRequestsEnabled = true,
+                                MetricName = "AWS-CS-AWSManagedRulesAnonymousIpList",
+                        },
+                        OverrideAction = new CfnWebACL.OverrideActionProperty
+                        {
+                            None = new CfnWebACL.RuleActionProperty{ Count = false },
+                        }, 
                     },
                 }
             });

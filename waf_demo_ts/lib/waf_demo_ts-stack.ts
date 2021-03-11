@@ -33,7 +33,7 @@ export class WafDemoTsStack extends cdk.Stack {
               visibilityConfig: {
                   sampledRequestsEnabled: true,
                   cloudWatchMetricsEnabled: true,
-                  metricName: "AWS-AWSManagedRulesCommonRuleSet"
+                  metricName: "AWS-TS-AWSManagedRulesCommonRuleSet"
               }
           },
           {
@@ -51,7 +51,7 @@ export class WafDemoTsStack extends cdk.Stack {
               visibilityConfig: {
                   sampledRequestsEnabled: true,
                   cloudWatchMetricsEnabled: true,
-                  metricName: "AWS-AWSManagedRulesAmazonIpReputationList"
+                  metricName: "AWS-TS-AWSManagedRulesAmazonIpReputationList"
               }
           }
         ],
