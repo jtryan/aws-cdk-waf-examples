@@ -49,7 +49,7 @@ namespace WafDemoCs
                         },
                         OverrideAction = new CfnWebACL.OverrideActionProperty
                         {
-                            None = new CfnWebACL.RuleActionProperty{Count=false},
+                            Count = new CfnWebACL.RuleActionProperty{ Count = true },
                         }, 
 
                         // Recommded by awscdl tem - it fails
@@ -57,6 +57,29 @@ namespace WafDemoCs
                         // {
                         //     Count = {}
                         // },
+                    },
+                    new CfnWebACL.RuleProperty
+                    {
+                        Name = "AWSManagedRulesAnonymousIpList",
+                        Priority = 1,
+                        Statement = new CfnWebACL.StatementOneProperty
+                        {
+                            ManagedRuleGroupStatement = new CfnWebACL.ManagedRuleGroupStatementProperty
+                            {
+                                VendorName = "AWS",
+                                Name = "AWSManagedRulesAnonymousIpList",
+                            },
+                        },
+                        VisibilityConfig = new CfnWebACL.VisibilityConfigProperty
+                        {
+                                CloudWatchMetricsEnabled = true,
+                                SampledRequestsEnabled = true,
+                                MetricName = "AWS-CS-AWSManagedRulesAnonymousIpList",
+                        },
+                        OverrideAction = new CfnWebACL.OverrideActionProperty
+                        {
+                            None = new CfnWebACL.RuleActionProperty{ Count = false },
+                        }, 
                     },
                 }
             });
