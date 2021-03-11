@@ -45,7 +45,7 @@ namespace WafDemoCs
                         {
                                 CloudWatchMetricsEnabled = true,
                                 SampledRequestsEnabled = true,
-                                MetricName = "AWS--CS-AWSManagedRulesCommonRuleSet",
+                                MetricName = "AWS-CS-AWSManagedRulesCommonRuleSet",
                         },
                         OverrideAction = new CfnWebACL.OverrideActionProperty
                         {

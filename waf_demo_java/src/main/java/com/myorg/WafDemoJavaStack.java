@@ -34,6 +34,7 @@ public class WafDemoJavaStack extends Stack {
             }
         };
 
+        //TODO: fix this
 //        CfnWebACL.DefaultActionProperty defaultActionProperty = CfnWebACL.DefaultActionProperty.builder()
 //                .allow(CfnWebACL.RuleActionProperty.builder().allow(true).build())
 //                .build();
@@ -47,7 +48,8 @@ public class WafDemoJavaStack extends Stack {
                             .allow(CfnWebACL.RuleActionProperty.builder().allow(true).build())
                             .build())
                     .visibilityConfig(visibilityConfigProperty)
-                    .rules(new ArrayList<>())
+                    .rules(new ArrayList<>()) 
+                    //TODO: add rules
                     .build();
 
     }
